@@ -6,7 +6,7 @@ package edu.escuelaing.arem.ASE.app;
 public class main {
 
     public static void main(String[] args) {
-        Aplication api= new Aplication();
+        LinkedList api= new LinkedList();
         api.agregarNodo(1);
         api.agregarNodo(10);
         api.agregarNodo(15);

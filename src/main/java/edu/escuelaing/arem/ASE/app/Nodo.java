@@ -26,7 +26,7 @@ public class Nodo {
     
     /**retorna el valor almacenado en el nodo
      * 
-     * @return un entetero que el nodo contiene
+     * @return valor un entetero que el nodo contiene
      */
     public int getValor() {
         return valor;
