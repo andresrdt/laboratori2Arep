@@ -13,46 +13,37 @@ import java.util.Scanner;
  */
 public class Aplication {
     /**
-     * creador de la clase aplicacion.
-     * se leeeran una lista de numeros que terminara al escribir -1. cada numero escrito es asignado como valor de un nodo que se crea. 
-     * head y tail se refieren a la cola y cabeza de la lista, nd es el nodo que se esta creando y oldnd es uan variable usada para guardar
-     * el nodo recien creado.
+     * creador de la clase aplicacion. 
+     * head y tail se refieren a la cola y cabeza de la lista.
      */
     Nodo head = null;  
     Nodo Tail = null;
     public Aplication() {
-        Scanner sc = new Scanner(System.in);
-        int numero = 0;
-        Nodo nd;
-        Nodo oldnd = null;
-        boolean First = true;
-        System.out.println("introduzca los numeros de la lista. Escriba -1 para salir.");
-        do {
-            numero = sc.nextInt();
-            if (First) {
-                nd = new Nodo(numero);
-                head = nd;
-                First = false;
-                oldnd = nd;
-            } else {
-                if (numero != -1) {
-                    oldnd.setNext(new Nodo(numero));
-                    nd = oldnd.getNext();
-                    oldnd = nd;
-                } else {
+        head=null;
+        Tail=null;
+    }
 
-                    Tail = oldnd;
-                }
+    public Nodo getHead() {
+        return head;
+    }
 
-            }
-        } while (numero != -1);
-        float media= themedia(head);
-        float deviation= deviationStandar(head,(int)media);
-        System.out.println("The media is : ");
-        System.out.println(media);
-        System.out.println("The deviation is : ");
-        System.out.println(deviation);
-        
+    public Nodo getTail() {
+        return Tail;
+    }
+    /**
+     * agrega un nodo a la lista en la cola
+     * @param n valor del nodo a agregar 
+     */
+    public  void agregarNodo(int n){
+        if (head==null){
+            head=new Nodo(n);
+        } else if (listSize(head)==1){
+            head.setNext(new Nodo(n));
+            Tail= head.getNext();
+        } else{
+            Tail.setNext(new Nodo(n));
+            Tail=Tail.getNext();
+        }
     }
     /**
      * 
