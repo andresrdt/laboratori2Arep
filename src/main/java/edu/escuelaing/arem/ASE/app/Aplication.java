@@ -12,12 +12,17 @@ import java.util.Scanner;
  * @author Andres
  */
 public class Aplication {
-
+    /**
+     * creador de la clase aplicacion.
+     * se leeeran una lista de numeros que terminara al escribir -1. cada numero escrito es asignado como valor de un nodo que se crea. 
+     * head y tail se refieren a la cola y cabeza de la lista, nd es el nodo que se esta creando y oldnd es uan variable usada para guardar
+     * el nodo recien creado.
+     */
+    Nodo head = null;  
+    Nodo Tail = null;
     public Aplication() {
         Scanner sc = new Scanner(System.in);
         int numero = 0;
-        Nodo head = null;
-        Nodo Tail = null;
         Nodo nd;
         Nodo oldnd = null;
         boolean First = true;
@@ -31,7 +36,7 @@ public class Aplication {
                 oldnd = nd;
             } else {
                 if (numero != -1) {
-                    oldnd.Next(new Nodo(numero));
+                    oldnd.setNext(new Nodo(numero));
                     nd = oldnd.getNext();
                     oldnd = nd;
                 } else {
@@ -49,6 +54,11 @@ public class Aplication {
         System.out.println(deviation);
         
     }
+    /**
+     * 
+     * @param head es la cabeza de la lista
+     * @return el tamaño de la lista
+     */
     public int listSize(Nodo head){
         int respuesta=0;
         while(head!=null){
@@ -57,6 +67,11 @@ public class Aplication {
         }
         return respuesta;
     }
+    /**
+     * 
+     * @param head es la cabeza de la lista
+     * @return la media de la lista 
+     */
     public float themedia(Nodo head){
         int size=listSize(head);
         int respuesta=0;
@@ -67,6 +82,12 @@ public class Aplication {
         respuesta=respuesta/size;
         return respuesta;
     }
+    /**
+     * 
+     * @param head es la cabeza de la lista
+     * @param media media de la lista
+     * @return es la desviacion estandar de la lista
+     */
     public float deviationStandar(Nodo head,int media){
         int size=listSize(head);
         float respuesta=0;
@@ -76,6 +97,27 @@ public class Aplication {
         }
         respuesta=respuesta/(size-1);
         return (float)Math.sqrt(respuesta);
+    }
+    /**
+     * elimina un nodo de la lista. 
+     * @param valor el valor del nodo a eliminar
+     */
+    public void DeleteNodo(int valor){
+        Nodo temp=head;
+        Nodo flag=null;
+        while (temp!=null){
+            if (head.getValor()==valor || temp==head){
+                head=temp.getNext();
+            if (temp.getNext()==Tail || Tail.getValor()==valor){
+                Tail=temp;
+                temp.setNext(null);
+            }
+            if (temp.getNext().getValor()==valor){
+                    flag=temp.getNext();
+                    temp.setNext(flag.getNext());
+                }
+            }
+        }
     }
 }
 

@@ -8,26 +8,34 @@ package edu.escuelaing.arem.ASE.app;
 /**
  *
  * @author 2112076
+ * Esta clase representa a un nodo y sus componentes.
  */
 public class Nodo {
-    /**
-    * @param valor Es el numero que se almacena dentro del nodo.
-    * @param next se refiere al siguente nodo en la lista.
-    */
     int valor;
     Nodo next=null;
-
-    public void Next(Nodo next) {
+    /**
+     * 
+     * @param next la referencia al siguiente nodo a este. 
+     */
+    public void setNext(Nodo next) {
         this.next = next;
     }
     public Nodo(int valor) {
         this.valor = valor;
     }
-
+    
+    /**retorna el valor almacenado en el nodo
+     * 
+     * @return un entetero que el nodo contiene
+     */
     public int getValor() {
         return valor;
     }
 
+    /**
+     * 
+     * @return una referencia al siguiente nodo 
+     */
     public Nodo getNext() {
         return next;
     }
