@@ -37,7 +37,7 @@ public class LinkedList {
     public  void agregarNodo(int n){
         if (head==null){
             head=new Nodo(n);
-        } else if (listSize(head)==1){
+        } else if (listSize()==1){
             head.setNext(new Nodo(n));
             Tail= head.getNext();
         } else{
@@ -50,12 +50,14 @@ public class LinkedList {
      * @param head es la cabeza de la lista
      * @return el tamaño de la lista
      */
-    public int listSize(Nodo head){
+    public int listSize(){
+        Nodo temp=head;
         int respuesta=0;
         while(head!=null){
             respuesta+=1;
             head=head.getNext();
         }
+        head=temp;
         return respuesta;
     }
     /**
@@ -64,13 +66,15 @@ public class LinkedList {
      * @return la media de la lista 
      */
     public float themedia(){
-        int size=listSize(head);
+        Nodo temp=head;
+        int size=listSize();
         int respuesta=0;
         while(head!=null){
             respuesta+=head.getValor();
             head=head.getNext();
         }
         respuesta=respuesta/size;
+        head=temp;
         return respuesta;
     }
     /**
@@ -79,12 +83,14 @@ public class LinkedList {
      * @param media media de la lista
      * @return es la desviacion estandar de la lista
      */
-    public float deviationStandar(int media){
-        int size=listSize(head);
+    public float deviationStandar(float media){
+        int size=listSize();
+        int cont=1;
         float respuesta=0;
-        while(head!=null){
+        while(cont<=size){
             respuesta+= (float)Math.pow(Math.abs((head.getValor()-media)),2);
             head=head.getNext();
+            cont+=1;
         }
         respuesta=respuesta/(size-1);
         return (float)Math.sqrt(respuesta);
