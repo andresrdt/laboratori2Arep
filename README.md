@@ -9,3 +9,5 @@ Aplicacion es la clase que simplemente hace uso de linkedList  para encontrar la
 A continuación se explicara el funcionamiento del programa descrito anteriormente. Al momento de ejecutar el programa se encontrara que en el local host se pediran los datos de la lista de numeros. se escriben separando por coma y al momento de dar click en submit se redirrecionara la pagina a otra con tanto la media como la desvicacion de la lista.
 ## Solución
 Una cuarta clase llamada main se encarga de propocionar la lectura y el uso de spark. las otras tres aplicaciones realizan el procedimiento de forma interna.
+## heroku 
+link: https://polar-wildwood-37533.herokuapp.com/inputdata
