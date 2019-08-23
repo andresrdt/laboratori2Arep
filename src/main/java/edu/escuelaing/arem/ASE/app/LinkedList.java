@@ -5,116 +5,84 @@
  */
 package edu.escuelaing.arem.ASE.app;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.Scanner;
+import javax.xml.ws.Response;
+import jdk.nashorn.internal.ir.RuntimeNode.Request;
 
 /**
  *
  * @author Andres
  */
 public class LinkedList {
-    /**
-     * creador de la clase aplicacion. 
-     * head y tail se refieren a la cola y cabeza de la lista.
-     */
-    Nodo head = null;  
-    Nodo Tail = null;
-    public LinkedList() {
+    private Nodo head;
+    private Nodo tail;
+    private int numeroElementos;
+    private String txt="";
+    
+    public LinkedList(){
         head=null;
-        Tail=null;
+        numeroElementos=0;
     }
-
+    /**
+    * A?ade un elemento a la lista
+    *@param numero representa el valor que se va agregar en la lista(un numero en este caso)
+    */
+    public void add(double numero){
+        numeroElementos++;
+        if (head==null){
+            head= new Nodo((int)numero);
+            tail=head;
+        } else{
+            Nodo Temp= new Nodo((int)numero);
+            tail.setNext(Temp);
+            tail=Temp;
+        }
+    }
+    /**
+     * funcion que regresa el primer elemnto agregado
+     * @return devuelve el primer elemento de la lista 
+     */
     public Nodo getHead() {
         return head;
     }
-
-    public Nodo getTail() {
-        return Tail;
+    /**
+     * indica la cantidad de elementos en la lista
+     * @return cantidad de elementos en la lista
+     */
+    public int getNumeroElementos() {
+        return numeroElementos;
     }
     /**
-     * agrega un nodo a la lista en la cola
-     * @param n valor del nodo a agregar 
+     * lee el archivo y mete los elementos de este en la lista, cada numero esta en una linea diferente
+     * @param file direccion del arciovo a leer
      */
-    public  void agregarNodo(int n){
-        if (head==null){
-            head=new Nodo(n);
-        } else if (listSize()==1){
-            head.setNext(new Nodo(n));
-            Tail= head.getNext();
-        } else{
-            Tail.setNext(new Nodo(n));
-            Tail=Tail.getNext();
-        }
-    }
-    /**
-     * 
-     * @param head es la cabeza de la lista
-     * @return el tamaño de la lista
-     */
-    public int listSize(){
-        Nodo temp=head;
-        int respuesta=0;
-        while(head!=null){
-            respuesta+=1;
-            head=head.getNext();
-        }
-        head=temp;
-        return respuesta;
-    }
-    /**
-     * 
-     * @param head es la cabeza de la lista
-     * @return la media de la lista 
-     */
-    public float themedia(){
-        Nodo temp=head;
-        int size=listSize();
-        int respuesta=0;
-        while(head!=null){
-            respuesta+=head.getValor();
-            head=head.getNext();
-        }
-        respuesta=respuesta/size;
-        head=temp;
-        return respuesta;
-    }
-    /**
-     * 
-     * @param head es la cabeza de la lista
-     * @param media media de la lista
-     * @return es la desviacion estandar de la lista
-     */
-    public float deviationStandar(float media){
-        int size=listSize();
-        int cont=1;
-        float respuesta=0;
-        while(cont<=size){
-            respuesta+= (float)Math.pow(Math.abs((head.getValor()-media)),2);
-            head=head.getNext();
-            cont+=1;
-        }
-        respuesta=respuesta/(size-1);
-        return (float)Math.sqrt(respuesta);
-    }
-    /**
-     * elimina un nodo de la lista. 
-     * @param valor el valor del nodo a eliminar
-     */
-    public void DeleteNodo(int valor){
-        Nodo temp=head;
-        Nodo flag=null;
-        while (temp!=null){
-            if (head.getValor()==valor || temp==head){
-                head=temp.getNext();
-            if (temp.getNext()==Tail || Tail.getValor()==valor){
-                Tail=temp;
-                temp.setNext(null);
+    public void leer(String file){
+        try{
+            BufferedReader bf = new BufferedReader(new FileReader(file));
+            String bfRead;
+            while ((bfRead=bf.readLine()) != null){
+                this.add(Double.parseDouble(bfRead));
             }
-            if (temp.getNext().getValor()==valor){
-                    flag=temp.getNext();
-                    temp.setNext(flag.getNext());
-                }
-            }
+        } catch (Exception e){
+            System.err.println("No se encontro el archivo ");
         }
+    }
+    public void read(String string){
+        String[] part=string.split(",");
+        for(String i:part){
+            this.add(Double.parseDouble(i));
+        }
+    }
+    @Override
+    public String toString() {
+         Nodo temp=head;
+         while (temp.getNext()!= null){
+            txt=txt+temp.getValor();
+            temp=temp.getNext();
+         }
+        return txt;
     }
 }
 
